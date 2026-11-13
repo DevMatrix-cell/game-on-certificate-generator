@@ -8,7 +8,7 @@ A starter Next.js app for participant-entered certificate generation.
 - Unique certificate ID and QR code.
 - Verification route (`/verify/[id]`).
 - Optional Supabase persistence for generated certificate records.
-- Admin upload screen for the supplied PNG/JPG template (upload storage only; artwork placement still needs matching).
+- Admin upload screen for PNG/JPG artwork (uploads to storage; does not replace the active template).
 
 ## Important
 This MVP does **not** verify attendance. Anyone with the public link can enter a name and generate a certificate. The verification page confirms only that a certificate record exists, not that the person attended or that Google issued it. Do not describe the generated PDF as officially issued by Google unless Google has approved this workflow and certificate artwork.
@@ -29,5 +29,5 @@ This MVP does **not** verify attendance. Anyone with the public link can enter a
 
 Without Supabase env vars, the PDF still downloads, but QR verification cannot look up stored records.
 
-## Template next step
-Upload your actual approved certificate artwork (preferably PNG, landscape, high resolution). Then map the name, date, session title, signature/issuer text and QR positions to that exact artwork. The sample PDF layout is currently a placeholder and should not be distributed as the official Google certificate.
+## Certificate artwork
+The generator uses the supplied `public/certificate-template.png` artwork, adding the participant name and the event date (14 November 2026) in their blank areas. The PDF is rendered from the same preview. To replace the artwork, update this file and adjust the overlay positions in `app/certificate-name.css`. Uploads from the admin screen are stored in Supabase but do not change the active template.
